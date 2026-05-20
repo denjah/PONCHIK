@@ -1,0 +1,8 @@
+backup_v01/
+screenshots/
+.gemini/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
