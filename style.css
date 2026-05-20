@@ -15,6 +15,10 @@
 @font-face { font-family: 'Bryndan_Hand'; src: url('fonts/Bryndan_Hand.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Brush Script'; src: url('fonts/Brush Script.ttf') format('truetype'); font-weight: normal; font-style: normal; font-display: swap; }
 @font-face { font-family: '8NeutralGrotesk-RegularItalic'; src: url('fonts/8NeutralGrotesk-RegularItalic.ttf') format('truetype'); font-weight: normal; font-style: italic; font-display: swap; }
+@font-face { font-family: 'UnboundedVar'; src: url('fonts/variable/Unbounded-Variable.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'MontserratUnderlineVar'; src: url('fonts/variable/MontserratUnderline-VariableFont_wght.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'CygunWide'; src: url('fonts/variable/Cygun-Wide.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'PlayfairItalicVar'; src: url('fonts/variable/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype'); font-weight: 100 900; font-style: italic; font-display: swap; }
 
 /* --- CSS Reset --- */
 *, *::before, *::after {
@@ -102,6 +106,39 @@ body.theme-4 {
   --font-body: '8NeutralGrotesk-RegularItalic', sans-serif;
 }
 
+body.theme-5 {
+  --c-bg: #F0F4FF;
+  --c-primary: #4A90E2;
+  --c-secondary: #50E3C2;
+  --c-accent: #F5A623;
+  --c-dark: #1C1C1C;
+  --font-display: 'UnboundedVar', sans-serif;
+  --font-sub: 'MontserratUnderlineVar', sans-serif;
+  --font-body: 'UnboundedVar', sans-serif;
+}
+
+body.theme-6 {
+  --c-bg: #FFF5F5;
+  --c-primary: #E53E3E;
+  --c-secondary: #ED8936;
+  --c-accent: #38B2AC;
+  --c-dark: #2D3748;
+  --font-display: 'CygunWide', sans-serif;
+  --font-sub: 'PlayfairItalicVar', serif;
+  --font-body: 'PlayfairItalicVar', serif;
+}
+
+body.theme-7 {
+  --c-bg: #F4F0FF;
+  --c-primary: #9F7AEA;
+  --c-secondary: #ED64A6;
+  --c-accent: #ECC94B;
+  --c-dark: #1A202C;
+  --font-display: 'MontserratUnderlineVar', sans-serif;
+  --font-sub: 'UnboundedVar', sans-serif;
+  --font-body: 'MontserratUnderlineVar', sans-serif;
+}
+
 /* ============================================
    2. BASE STYLES
    ============================================ */
@@ -153,11 +190,37 @@ body::after {
   opacity: 0.04;
 }
 
+@keyframes floatFontAxis {
+  0% { font-variation-settings: 'wght' 300, 'wdth' 80; }
+  50% { font-variation-settings: 'wght' 800, 'wdth' 120; }
+  100% { font-variation-settings: 'wght' 300, 'wdth' 80; }
+}
+
 h1 {
   font-family: var(--font-display);
   text-transform: uppercase;
   line-height: 0.95;
   letter-spacing: -0.02em;
+}
+
+body.theme-5 h1, body.theme-6 h1, body.theme-7 h1,
+body.theme-5 .section-title, body.theme-6 .section-title, body.theme-7 .section-title {
+  animation: floatFontAxis 4s ease-in-out infinite;
+}
+
+body.theme-5 h2, body.theme-6 h2, body.theme-7 h2,
+body.theme-5 h3, body.theme-6 h3, body.theme-7 h3,
+body.theme-5 .neo-btn, body.theme-6 .neo-btn, body.theme-7 .neo-btn,
+body.theme-5 .nav-links a, body.theme-6 .nav-links a, body.theme-7 .nav-links a {
+  transition: font-variation-settings 0.4s ease;
+  font-variation-settings: 'wght' 400, 'wdth' 100;
+}
+
+body.theme-5 h2:hover, body.theme-6 h2:hover, body.theme-7 h2:hover,
+body.theme-5 h3:hover, body.theme-6 h3:hover, body.theme-7 h3:hover,
+body.theme-5 .neo-btn:hover, body.theme-6 .neo-btn:hover, body.theme-7 .neo-btn:hover,
+body.theme-5 .nav-links a:hover, body.theme-6 .nav-links a:hover, body.theme-7 .nav-links a:hover {
+  font-variation-settings: 'wght' 800, 'wdth' 120;
 }
 
 h2, h3, h4, h5, h6 {
@@ -266,11 +329,21 @@ img {
   box-shadow: 2px 2px 0 0 var(--c-primary);
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--c-card);
+  border: 2px solid var(--c-dark);
+  border-radius: var(--r-md);
+  box-shadow: 2px 2px 0 0 var(--c-dark);
+}
+
 .theme-switcher {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-left: 1rem;
+  gap: 0.4rem;
 }
 
 .theme-label {
@@ -298,6 +371,9 @@ img {
 .theme-btn-2 { background: #FFDE00; }
 .theme-btn-3 { background: #D35400; }
 .theme-btn-4 { background: #FF9A9E; }
+.theme-btn-5 { background: #4A90E2; }
+.theme-btn-6 { background: #E53E3E; }
+.theme-btn-7 { background: #9F7AEA; }
 
 /* ============================================
    5. HERO

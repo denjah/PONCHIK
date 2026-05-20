@@ -266,6 +266,44 @@ document.addEventListener('DOMContentLoaded', () => {
         p.x += Math.sin(p.life * 10) * 1.5; // wobble
         if (p.life <= 0) particles.splice(i, 1);
       });
+    } else if (['5','6','7'].includes(currentTheme)) {
+      // Variable fonts themes - floating shapes
+      ctx.fillStyle = currentTheme === '5' ? 'rgba(240, 244, 255, 0.2)' : currentTheme === '6' ? 'rgba(255, 245, 245, 0.2)' : 'rgba(244, 240, 255, 0.2)';
+      ctx.fillRect(0, 0, width, height);
+
+      let pal = currentTheme === '5' ? ['#4A90E2', '#50E3C2', '#F5A623'] : currentTheme === '6' ? ['#E53E3E', '#ED8936', '#38B2AC'] : ['#9F7AEA', '#ED64A6', '#ECC94B'];
+      
+      if (Math.abs(mouse.vx) > 1 || Math.abs(mouse.vy) > 1) {
+        particles.push({
+          x: mouse.x, y: mouse.y,
+          size: Math.random() * 20 + 5,
+          color: pal[Math.floor(Math.random()*3)],
+          life: 1,
+          rot: Math.random() * Math.PI * 2,
+          vrot: (Math.random() - 0.5) * 0.2
+        });
+      }
+      
+      particles.forEach((p, i) => {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.moveTo(-p.size/2, p.size/2);
+        ctx.lineTo(p.size/2, p.size/2);
+        ctx.lineTo(0, -p.size/2);
+        ctx.fill();
+        ctx.strokeStyle = '#1A1A1A';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+        
+        p.life -= 0.02;
+        p.rot += p.vrot;
+        p.y += 0.5;
+        if (p.life <= 0) particles.splice(i, 1);
+      });
     }
   }
   
